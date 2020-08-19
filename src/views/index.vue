@@ -22,32 +22,56 @@
         .ivu-row-flex{
             height: 100%;
         }
+        .serverinfo{
+            line-height: 10px;
+        }
     }
 </style>
 <template>
     <div class="index">
         <Row type="flex" justify="center" align="middle">
             <Col span="24">
-                <h1>
-                    <img src="../images/logo.png">
-                </h1>
-                <h2>
-                    <p>Welcome to your View UI app!</p>
-                    <Button @click="handleStart">Start View UI</Button>
-                </h2>
+                <serverinfo v-for="(item, index) in servers"
+                    :key="index"
+                    :index="index"
+                    :server="item"
+                    @deleteIndex="del"
+                > </serverinfo>
+                <br>
+                <Button @click="add()">点击添加</Button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Button @click="handleStart" type="primary">Start</Button>
+                </br>
             </Col>
         </Row>
     </div>
 </template>
 <script>
+    import Serverinfo from './serverinfo'
     export default {
+        components:{
+            Serverinfo
+        },
+        data(){
+            return {
+                servers:[{ip:'', user:'',password:''}]
+            }
+        },
         methods: {
+            add() {
+                this.servers.push({ip:'', user:'',password:''});
+            },
+            del(val) {
+                if (val !== 0) {
+                    this.servers.splice(val, 1);
+                }
+            },
             handleStart () {
                 this.$Modal.info({
-                    title: 'Bravo',
-                    content: 'Now, enjoy the convenience of View UI.'
+                    title: this.servers[0].ip,
+                    content: this.servers[0].user
                 });
-            }
+            },
         }
     }
 </script>
