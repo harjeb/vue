@@ -1,6 +1,6 @@
 <style scoped lang="less">
     .index{
-        width: 700px;
+        width: 800px;
         position: absolute;
         top: 220px;
         bottom: 0;
@@ -8,9 +8,9 @@
         height: 500px;
         text-align: center;
 
-        .ivu-row-flex{
-            height: 100%;
-        }
+        // .ivu-row-flex{
+        //     height: 100%;
+        // }
         .serverinfo{
             line-height: 10px;
         }
@@ -18,15 +18,16 @@
 </style>
 <template>
     <div class="index">
-        <Scroll height=150>
-        <Row type="flex" justify="center" align="middle">
+        <Scroll height=300>
+        <Row justify="center" align="middle">
             <Col span="24">
                 <serverinfo v-for="(item, index) in servers"
                     :key="index"
                     :index="index"
                     :server="item"
                     @deleteIndex="del"
-                > </serverinfo>
+                > 
+                </serverinfo>
             </Col>
         </Row>
         </Scroll>
