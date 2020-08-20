@@ -73,6 +73,14 @@ export default {
         },
         check() {
             console.log(config.flag)
+            this.$axios.get('http://127.0.0.1:5000/api/hi').then((response)=>{
+                    this.newsList=response.data.data;
+                    console.log(this.newsList);
+                }).catch((response)=>{
+                    console.log(response);
+                })
+            console.log('11')
+
             if (this.server.ip.match(/^\s*$/) || this.server.user.match(/^\s*$/) || this.server.password.match(/^\s*$/)){
                 alert("没有填写信息")
                 this.$refs.checkBtn.$el.innerText="检查网络";

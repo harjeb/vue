@@ -5,7 +5,9 @@ import Routers from './router';
 import Util from './libs/util';
 import App from './app.vue';
 import 'view-design/dist/styles/iview.css';
+import axios from 'axios';
 
+Vue.prototype.$axios = axios; //全局注册，使用方法为:this.$axios
 Vue.use(VueRouter);
 Vue.use(ViewUI);
 
