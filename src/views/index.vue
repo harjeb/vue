@@ -1,24 +1,13 @@
 <style scoped lang="less">
     .index{
-        width: 100%;
+        width: 700px;
         position: absolute;
-        top: 0;
+        top: 220px;
         bottom: 0;
-        left: 0;
+        left: 50px;
+        height: 500px;
         text-align: center;
-        h1{
-            height: 150px;
-            img{
-                height: 100%;
-            }
-        }
-        h2{
-            color: #666;
-            margin-bottom: 200px;
-            p{
-                margin: 0 0 50px;
-            }
-        }
+
         .ivu-row-flex{
             height: 100%;
         }
@@ -29,6 +18,7 @@
 </style>
 <template>
     <div class="index">
+        <Scroll height=150>
         <Row type="flex" justify="center" align="middle">
             <Col span="24">
                 <serverinfo v-for="(item, index) in servers"
@@ -37,13 +27,14 @@
                     :server="item"
                     @deleteIndex="del"
                 > </serverinfo>
-                <br>
+            </Col>
+        </Row>
+        </Scroll>
+            <br>
                 <Button @click="add()">点击添加</Button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button @click="handleStart" type="primary">Start</Button>
-                </br>
-            </Col>
-        </Row>
+            </br>
     </div>
 </template>
 <script>
@@ -72,6 +63,7 @@
                     content: this.servers[0].user
                 });
             },
+          
         }
     }
 </script>
