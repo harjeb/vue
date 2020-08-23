@@ -81,7 +81,7 @@ export default {
                 }
             })
         },
-        async getRes(){
+        async btnConvert(){
             try {
                 if (this.server.ip.match(/^\s*$/) || this.server.user.match(/^\s*$/) || this.server.password.match(/^\s*$/)){
                     alert("没有填写信息");
