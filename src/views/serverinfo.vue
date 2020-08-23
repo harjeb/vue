@@ -73,7 +73,13 @@ export default {
         },
         //get latency
         getLatency(){
-            return this.$axios.get('http://127.0.0.1:5000/api/hi')
+            return this.$axios.get('http://127.0.0.1:5000/api/ms',{
+                params:{
+                    ip:this.server.ip,
+                    user:this.server.user,
+                    password:this.server.password
+                }
+            })
         },
         async getRes(){
             try {
@@ -83,9 +89,11 @@ export default {
                 else{let ll = await this.getLatency();
                 console.log(ll.data);
                 this.$refs.checkBtn.$el.innerText=ll.data;}
+                this.$refs.checkBtn.type= "success"
             } catch(err) {
                 console.log(err)
                 this.$refs.checkBtn.$el.innerText='failed';
+                this.$refs.checkBtn.type= "error"
             }
         }
 
