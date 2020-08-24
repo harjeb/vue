@@ -84,19 +84,28 @@ export default {
         },
         async btnConvert(){
             try {
+
+
                 if (this.server.ip.match(/^\s*$/) || this.server.user.match(/^\s*$/) || this.server.password.match(/^\s*$/)){
                     alert("没有填写信息");
                 }
                 else{
-                let ll = await this.getLatency();
+                    if (this.isBtnLoading === false){
+                        this.isBtnLoading=true
+                        let ll = await this.getLatency();
+                    }
+                this.isBtnLoading = false
                 console.log(ll.data);
                 this.$refs.checkBtn.$el.innerText=ll.data;
                 }
                 this.$refs.checkBtn.type= "success"
+
             } catch(err) {
                 console.log(err)
+                this.isBtnLoading = false
                 this.$refs.checkBtn.$el.innerText='failed';
                 this.$refs.checkBtn.type= "error"
+
             }
         }
 
