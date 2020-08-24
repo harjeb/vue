@@ -7,6 +7,7 @@ import App from './app.vue';
 import 'view-design/dist/styles/iview.css';
 import axios from 'axios';
 
+axios.defaults.baseURL = 'http://10.3.11.253:5000/'
 Vue.prototype.$axios = axios; //全局注册，使用方法为:this.$axios
 Vue.use(VueRouter);
 Vue.use(ViewUI);

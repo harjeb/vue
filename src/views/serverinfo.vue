@@ -9,7 +9,7 @@
         <Option v-for="item in moduleList" :value="item.value" :key="item.value">{{ item.label }}</Option>
         </Select>
         &nbsp;
-        <Button @click="getRes" ref="checkBtn">检查网络</Button>
+        <Button @click="btnConvert" :loading="isBtnLoading" ref="checkBtn">检查网络</Button>
         &nbsp;
         <Button @click="deleteP" type="error" style="width:60px" >删除</Button>
         <br>
@@ -64,7 +64,8 @@ export default {
                         label: 'Canberra'
                     }
                 ],
-                testmodule: []
+                testmodule: [],
+                isBtnLoading: false,
         };
     },
     methods: {
@@ -73,7 +74,7 @@ export default {
         },
         //get latency
         getLatency(){
-            return this.$axios.get('http://127.0.0.1:5000/api/ms',{
+            return this.$axios.get('/api/ms',{
                 params:{
                     ip:this.server.ip,
                     user:this.server.user,
@@ -86,9 +87,11 @@ export default {
                 if (this.server.ip.match(/^\s*$/) || this.server.user.match(/^\s*$/) || this.server.password.match(/^\s*$/)){
                     alert("没有填写信息");
                 }
-                else{let ll = await this.getLatency();
+                else{
+                let ll = await this.getLatency();
                 console.log(ll.data);
-                this.$refs.checkBtn.$el.innerText=ll.data;}
+                this.$refs.checkBtn.$el.innerText=ll.data;
+                }
                 this.$refs.checkBtn.type= "success"
             } catch(err) {
                 console.log(err)
